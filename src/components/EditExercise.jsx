@@ -1,51 +1,37 @@
+import { useState } from "react";
+import { DatePicker } from "react-datepicker";
+
 const EditExercise = () => {
+  const [users, setUsers] = useState();
   return (
     <div>
       <h3>Edit Exercise Log</h3>
-      <form onSubmit={onSubmit}>
+      <form>
         <div className="form-group">
           <label>Username: </label>
         </div>
-        <select
-          ref={inputRef}
-          required
-          className="form-control"
-          value={state.username}
-          onChange={onChangeUsername}
-        >
-          {state.users?.map(function (user) {
+        <select required className="form-control">
+          {users.map(function (user) {
             return (
               <option key={user} value={user}>
                 {user}
               </option>
             );
           })}
-          ;<option>{state.username}</option>
+          ;<option>username</option>
         </select>
         <div className="form-group">
           <label>Description: </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            value={state.description}
-            onChange={onChangeDescription}
-          />
+          <input type="text" required className="form-control" />
         </div>
         <div className="form-group">
           <label>Duration: </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            value={state.duration}
-            onChange={onChangeDuration}
-          />
+          <input type="text" required className="form-control" />
         </div>
         <div className="form-group">
           <label>Date: </label>
           <div>
-            <DatePicker selected={state.date} onChange={onChangeDate} />
+            <DatePicker />
           </div>
         </div>
 

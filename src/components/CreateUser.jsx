@@ -1,4 +1,4 @@
-const createUser = () => {
+const CreateUser = () => {
   return (
     <div>
       <h3>Create New User</h3>
@@ -25,4 +25,4 @@ const createUser = () => {
   );
 };
 
-export default createUser;
+export default CreateUser;
