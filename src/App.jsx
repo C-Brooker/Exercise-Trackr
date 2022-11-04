@@ -16,7 +16,6 @@ function App() {
           <Route path="/" exact element={<ExercisePage />} />
           <Route path="/edit/:id" element={<EditExercisePage />} />
           <Route path="/create" element={<CreateExercisePage />} />
-          <Route path="/user" element={<CreateUserPage />} />
         </Routes>
       </div>
     </Router>

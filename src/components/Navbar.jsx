@@ -23,11 +23,6 @@ const Navbar = () => {
                   Create Exercise Log
                 </Link>
               </li>
-              <li className="hover: text-blue-100">
-                <Link to="/user" className="nav-link">
-                  Create User
-                </Link>
-              </li>
             </ul>
           </div>
         </nav>
