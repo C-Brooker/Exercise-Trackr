@@ -21,16 +21,21 @@ const CreateExercisePage = () => {
       exerciseReps: Number(exerciseReps),
       exerciseSets: Number(exerciseSets),
       exerciseFreq: Number(exerciseFreq),
-      selectDate: selectedDate.toLocaleDateString(),
+      exerciseDate: selectedDate.toLocaleDateString(),
     };
     alert(JSON.stringify(exercise));
-    const response = await fetch("http://localhost:5000/create", {
+    const options = {
       method: "POST",
       headers: {
+        Accept: "application/json",
         "content-type": "application/json",
       },
-      body: exercise,
-    });
+      body: JSON.stringify(exercise),
+    };
+    const response = await fetch(
+      "http://localhost:5000/exercises/add",
+      options
+    );
     const postStatus = await response.json();
     if (postStatus == 200) {
       alert("Exercise sucessfully added.");

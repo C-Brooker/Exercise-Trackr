@@ -1,7 +1,26 @@
+import { useEffect } from "react";
 import Exercise from "../Exercise";
 import ExerciseList from "../ExerciseList";
 
 const ExercisePage = () => {
+  const dataHandler = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "content-type": "application/json",
+      },
+    };
+    const response = await fetch("http://localhost:5000/exercises/", options);
+    response.json().then(function map(exercise) {
+      console.log(exercise[0]);
+    });
+  };
+
+  useEffect(() => {
+    dataHandler();
+  }, []);
+
   return (
     <div className="w-full">
       <div className="w-full min-w-full text-center">

@@ -9,6 +9,9 @@ const ExerciseList = () => {
       <div className="w full flex justify-between font-bold">
         <div>
           <h2>Exercise Name:</h2>
+          {exercises.map((exercise) => {
+            console.log(exercise.exerciseName);
+          })}
         </div>
         <div>
           <h2>Reps:</h2>
