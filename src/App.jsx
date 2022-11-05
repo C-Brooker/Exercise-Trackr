@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar.jsx";
 import EditExercisePage from "./components/pages/EditExercisePage.jsx";
 import ExercisePage from "./components/pages/ExercisePage.jsx";
 import CreateExercisePage from "./components/pages/CreateExercisePage.jsx";
-import CreateUserPage from "./components/pages/CreateUserPage.jsx";
 
 function App() {
   return (
