@@ -23,12 +23,11 @@ const CreateExercisePage = () => {
       exerciseFreq: Number(exerciseFreq),
       exerciseDate: selectedDate.toLocaleDateString(),
     };
-    alert(JSON.stringify(exercise));
+
     const options = {
       method: "POST",
       headers: {
-        Accept: "application/json",
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(exercise),
     };
@@ -37,9 +36,11 @@ const CreateExercisePage = () => {
       options
     );
     const postStatus = await response.json();
-    if (postStatus == 200) {
+    if (postStatus.status == 200) {
       alert("Exercise sucessfully added.");
-    } else alert("Exercise unsuccessfully added\n" + postStatus.message);
+    } else {
+      alert("Exercise unsuccessfully added\n" + postStatus.message);
+    }
     setLoading(false);
   };
 
