@@ -27,7 +27,7 @@ const EditExercisePage = () => {
       },
     };
     const response = await fetch(
-      `http://localhost:5000/exercises/${id}`,
+      `${process.env.REACT_APP_API_URL}/exercises/${id}`,
       options
     );
     const parsedResponse = await response.json();
@@ -63,7 +63,7 @@ const EditExercisePage = () => {
       body: JSON.stringify(exercise),
     };
     const response = await fetch(
-      `http://localhost:5000/exercises/update/${id}`,
+      `${process.env.REACT_APP_API_URL}/exercises/update/${id}`,
       options
     );
     const postStatus = await response.json();

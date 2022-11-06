@@ -14,9 +14,8 @@ const Exercise = ({ exercise }) => {
         "Content-Type": "application/json",
       },
     };
-    alert(`http://localhost:5000/delete/${id}`);
     const response = await fetch(
-      `http://localhost:5000/delete/${mongoose.Types.ObjectId(id)}`,
+      `${process.env.REACT_APP_API_URL}/delete/${mongoose.Types.ObjectId(id)}`,
       options
     );
     const parseRes = await response.json();

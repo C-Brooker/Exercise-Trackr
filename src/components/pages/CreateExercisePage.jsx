@@ -32,7 +32,7 @@ const CreateExercisePage = () => {
       body: JSON.stringify(exercise),
     };
     const response = await fetch(
-      "http://localhost:5000/exercises/add",
+      `${process.env.REACT_APP_API_URL}/exercises/add`,
       options
     );
     const postStatus = await response.json();
