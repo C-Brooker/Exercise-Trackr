@@ -18,16 +18,9 @@ const ExerciseList = () => {
       options
     );
     const parsedResponse = await response.json();
-    const colHeadings = {
-      exerciseName: "Exercise",
-      exerciseReps: "Reps",
-      exerciseSets: "Sets",
-      exerciseFreq: "Freq",
-      exerciseDate: "Date",
-    };
-    if (parsedResponse.status == 200) {
-      const exerciseList = [colHeadings, ...parsedResponse.body];
-      setExercises(exerciseList);
+
+    if (parsedResponse.status === 200) {
+      setExercises(parsedResponse.body);
     }
   };
 
@@ -40,25 +33,24 @@ const ExerciseList = () => {
   return (
     <div className="w-full">
       <div className="w full flex flex-col justify-between font-bold">
-        {exercises.map((exercise) => {
-          return <Exercise exercise={exercise} />;
-        })}
-        {/* <div>
-          <h2>Exercise Name:</h2>
-        </div>
-        <div>
-          <h2>Reps:</h2>
-        </div>
-        <div>
-          <h2>Sets:</h2>
-        </div>
-        <div>
-          <h2>Frequency:</h2>
-        </div>
-        <div>
-          <h2>Date:</h2>
-        </div>
-      </div> */}
+        <table className="text-xs m-2 border border-1 border-black shadow shadow-2xl sm:text-base">
+          <thead className="bg-blue-600">
+            <tr>
+              <th>Exercise:</th>
+              <th>Reps:</th>
+              <th>Sets:</th>
+              <th>Weight:</th>
+              <th>Date:</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {exercises.map((exercise) => {
+              return <Exercise key={exercise._id} exercise={exercise} />;
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

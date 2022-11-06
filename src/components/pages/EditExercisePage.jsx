@@ -8,7 +8,7 @@ const EditExercisePage = () => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseSets, setExerciseSets] = useState(0);
   const [exerciseReps, setExerciseReps] = useState(0);
-  const [exerciseFreq, setExerciseFreq] = useState(0);
+  const [exerciseWeight, setExerciseWeight] = useState(0);
   const [exerciseDate, setExerciseDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
 
@@ -31,11 +31,11 @@ const EditExercisePage = () => {
       options
     );
     const parsedResponse = await response.json();
-    if (parsedResponse.status == 200) {
+    if (parsedResponse.status === 200) {
       setExerciseName(parsedResponse.body.exerciseName);
       setExerciseReps(parsedResponse.body.exerciseReps);
       setExerciseSets(parsedResponse.body.exerciseSets);
-      setExerciseFreq(parsedResponse.body.exerciseFreq);
+      setExerciseWeight(parsedResponse.body.exerciseWeight);
 
       const dt = new Date(parsedResponse.body.exerciseDate);
       setExerciseDate(dt);
@@ -51,8 +51,8 @@ const EditExercisePage = () => {
       exerciseName: exerciseName,
       exerciseReps: Number(exerciseReps),
       exerciseSets: Number(exerciseSets),
-      exerciseFreq: Number(exerciseFreq),
-      exerciseDate: exerciseDate.toLocaleDateString(),
+      exerciseWeight: Number(exerciseWeight),
+      exerciseDate: exerciseDate,
     };
 
     const options = {
@@ -67,10 +67,11 @@ const EditExercisePage = () => {
       options
     );
     const postStatus = await response.json();
-    if (postStatus.status == 200) {
+    if (postStatus.status === 200) {
       alert("Exercise sucessfully updated.");
+      window.location = "/";
     } else {
-      alert("Exercise unsuccessfully updated\n" + postStatus.message);
+      alert("Exercise unsuccessfully updated");
     }
     setLoading(false);
   };
@@ -87,24 +88,24 @@ const EditExercisePage = () => {
           Edit exercise
         </h1>
       </div>
-      <div className="py-5 my-10 w-full h-full flex items-center justify-center">
+      <div className="py-5 my-7 w-full h-full flex items-center justify-center">
         <form
-          className="pt-5 px-2 h-80 flex flex-col space-y-2 w-8/12 items-center bg-gray-200 rounded-md shadow shadow-xl hover:border hover:border-1 hover:border-black"
+          className="pt-5 px-2 h-90 flex flex-col space-y-5 w-8/12 items-center bg-gray-200 rounded-md shadow shadow-2xl hover:border hover:border-1 hover:border-black bg-gradient-to-b from-gray-200 to-gray-300"
           onSubmit={submitHandler}
         >
           {/* exercise name */}
           <div className="w-full flex flex-col items-center justify-center">
-            <label className="text-lg font-bold">Exercise name:</label>
+            <label className="text-lg font-bold ">Exercise name:</label>
             <input
-              className="w-8/12 py-2 rounded-xl px-5"
+              className="w-8/12 py-2 rounded-xl px-5 text-center"
               placeholder={"Type Exercise Name"}
               onChange={(e) => setExerciseName(e.target.value)}
               value={exerciseName}
             />
           </div>
           {/* reps and sets and freq */}
-          <div className="w-full flex flex-col sm:flex-row space-x-2 justify-center items-center">
-            <div className="w-3/12 bg-gray-200 text-center">
+          <div className="w-full flex flex-row space-x-2 justify-center items-center">
+            <div className="w-3/12 text-center">
               <label className="text-lg font-bold">Reps</label>
               <input
                 className="p-2 rounded-xl w-full text-center"
@@ -115,7 +116,7 @@ const EditExercisePage = () => {
                 onChange={(e) => setExerciseReps(e.target.value)}
               />
             </div>
-            <div className="w-3/12 bg-gray-200 text-center">
+            <div className="w-3/12 text-center">
               <label className="text-lg font-bold">Sets</label>
               <input
                 className="p-2 rounded-xl w-full text-center"
@@ -126,15 +127,15 @@ const EditExercisePage = () => {
                 onChange={(e) => setExerciseSets(e.target.value)}
               />
             </div>
-            <div className="w-3/12 bg-gray-200 text-center">
+            <div className="w-3/12 text-center">
               <label className="text-lg font-bold">Rest</label>
               <input
                 className="p-2 rounded-xl w-full text-center "
                 placeholder="input.."
-                value={exerciseFreq}
+                value={exerciseWeight}
                 type={"number"}
                 min={1}
-                onChange={(e) => setExerciseFreq(e.target.value)}
+                onChange={(e) => setExerciseWeight(e.target.value)}
               />
             </div>
           </div>
@@ -144,6 +145,8 @@ const EditExercisePage = () => {
             <div className="flex justify-center">
               <DatePicker
                 className="px-1 w-6/12 rounded-md "
+                locale="en"
+                dateFormat="dd/MM/yyyy"
                 selected={exerciseDate}
                 onChange={(e) => dateHandler(e)}
               />

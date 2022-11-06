@@ -1,11 +1,9 @@
-import mongoose from "mongoose";
 import { Link } from "react-router-dom";
 
 const Exercise = ({ exercise }) => {
   const dt = new Date(exercise.exerciseDate);
   const date = dt.toLocaleDateString();
   const id = exercise._id;
-  const exerciseLog = `${date}: ${exercise.exerciseName} performed for ${exercise.exerciseSets} sets of ${exercise.exerciseReps} reps ${exercise.exerciseFreq} times per week`;
 
   const deleteExercise = async () => {
     const options = {
@@ -13,14 +11,15 @@ const Exercise = ({ exercise }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      body: null,
     };
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/delete/${mongoose.Types.ObjectId(id)}`,
+      `${process.env.REACT_APP_API_URL}/exercises/${id}`,
       options
     );
     const parseRes = await response.json();
 
-    if (parseRes.status == 200) {
+    if (parseRes.status === 200) {
       alert(`Exercise ${id} Successfully Deleted!`);
     } else {
       alert(`Exercise ${id} Unsuccessfully Deleted!`);
@@ -28,21 +27,28 @@ const Exercise = ({ exercise }) => {
   };
 
   return (
-    <div className="flex flex-row justify-between ">
-      <div>{exerciseLog}</div>
-      <div>
+    <tr className="text-center border border-2 border-r border-black bg-gradient-to-b from-gray-200 to-gray-300">
+      <td>{exercise.exerciseName}</td>
+      <td>{exercise.exerciseReps}</td>
+      <td>{exercise.exerciseSets}</td>
+      <td>{`${exercise.exerciseWeight} KG`}</td>
+      <td>{date}</td>
+      <td>
         <Link
+          className="hover:underline"
           to={{
             pathname: `/edit/${id}`,
           }}
         >
           edit
-        </Link>{" "}
-        {/* <div>
-          <button onClick={deleteExercise}>delete</button>
-        </div> */}
-      </div>
-    </div>
+        </Link>
+      </td>
+      <td>
+        <button className="hover:underline" onClick={deleteExercise}>
+          delete
+        </button>
+      </td>
+    </tr>
   );
 };
 

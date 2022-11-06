@@ -9,17 +9,20 @@ const Navbar = () => {
             to="/"
             className="font-bold text-xl text-white hover:text-blue-100"
           >
-            ExcerTracker.io
+            ExerciseTrackr
           </Link>
           <div>
             <ul className="flex sm:flex-row flex-col sm:space-x-4 sm:items-center justify-center text-white text-lg text-base">
               <li className="hover: text-blue-100">
-                <Link to="/" className="nav-link">
+                <Link to="/" className="hover:underline focus:font-semibold">
                   Exercises
                 </Link>
               </li>
               <li className="hover: text-blue-100">
-                <Link to="/create" className="nav-link">
+                <Link
+                  to="/create"
+                  className="hover:underline focus:font-semibold"
+                >
                   Create Exercise Log
                 </Link>
               </li>

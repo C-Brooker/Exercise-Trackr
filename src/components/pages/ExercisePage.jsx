@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import Exercise from "../Exercise";
 import ExerciseList from "../ExerciseList";
 
 const ExercisePage = () => {
   return (
     <div className="w-full">
-      <div className="w-full min-w-full text-center">
+      <div className="w-full text-center">
         <h1 className="font-bold text-4xl my-8 text-wrap text-blue-600">
           Exercise Log
         </h1>

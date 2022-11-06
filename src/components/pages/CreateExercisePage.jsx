@@ -7,8 +7,8 @@ const CreateExercisePage = () => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseSets, setExerciseSets] = useState(0);
   const [exerciseReps, setExerciseReps] = useState(0);
-  const [exerciseFreq, setExerciseFreq] = useState(0);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [exerciseWeight, setExerciseWeight] = useState(0);
+  const [exerciseDate, setExerciseDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
 
   const submitHandler = async (e) => {
@@ -20,8 +20,8 @@ const CreateExercisePage = () => {
       exerciseName: exerciseName,
       exerciseReps: Number(exerciseReps),
       exerciseSets: Number(exerciseSets),
-      exerciseFreq: Number(exerciseFreq),
-      exerciseDate: selectedDate.toLocaleDateString(),
+      exerciseWeight: Number(exerciseWeight),
+      exerciseDate: exerciseDate,
     };
 
     const options = {
@@ -36,10 +36,10 @@ const CreateExercisePage = () => {
       options
     );
     const postStatus = await response.json();
-    if (postStatus.status == 200) {
+    if (postStatus.status === 200) {
       alert("Exercise sucessfully added.");
     } else {
-      alert("Exercise unsuccessfully added\n" + postStatus.message);
+      alert("Exercise unsuccessfully added");
     }
     setLoading(false);
   };
@@ -53,9 +53,9 @@ const CreateExercisePage = () => {
           Add exercise to plan
         </h1>
       </div>
-      <div className="py-5 my-10 w-full h-full flex items-center justify-center">
+      <div className="py-5 my-7 w-full h-full flex items-center justify-center">
         <form
-          className="pt-5 px-2 h-80 flex flex-col space-y-2 w-8/12 items-center bg-gray-200 rounded-md shadow shadow-xl hover:border hover:border-1 hover:border-black"
+          className="pt-5 px-2 h-90 flex flex-col space-y-5 w-11/12 sm:w-8/12 items-center bg-gray-200 rounded-md shadow shadow-2xl hover:border hover:border-1 hover:border-black bg-gradient-to-b from-gray-200 to-gray-300"
           onSubmit={submitHandler}
         >
           {/* exercise name */}
@@ -69,8 +69,8 @@ const CreateExercisePage = () => {
             />
           </div>
           {/* reps and sets and freq */}
-          <div className="w-full flex flex-col sm:flex-row space-x-2 justify-center items-center">
-            <div className="w-3/12 bg-gray-200 text-center">
+          <div className="w-full flex flex-row space-x-2 justify-center items-center ">
+            <div className="w-3/12 text-center">
               <label className="text-lg font-bold">Reps</label>
               <input
                 className="p-2 rounded-xl w-full text-center"
@@ -81,7 +81,7 @@ const CreateExercisePage = () => {
                 onChange={(e) => setExerciseReps(e.target.value)}
               />
             </div>
-            <div className="w-3/12 bg-gray-200 text-center">
+            <div className="w-3/12 text-center">
               <label className="text-lg font-bold">Sets</label>
               <input
                 className="p-2 rounded-xl w-full text-center"
@@ -92,15 +92,15 @@ const CreateExercisePage = () => {
                 onChange={(e) => setExerciseSets(e.target.value)}
               />
             </div>
-            <div className="w-3/12 bg-gray-200 text-center">
-              <label className="text-lg font-bold">Rest</label>
+            <div className="w-3/12 text-center">
+              <label className="text-lg font-bold">Weight</label>
               <input
                 className="p-2 rounded-xl w-full text-center "
                 placeholder="input.."
-                value={exerciseFreq}
+                value={exerciseWeight}
                 type={"number"}
                 min={1}
-                onChange={(e) => setExerciseFreq(e.target.value)}
+                onChange={(e) => setExerciseWeight(e.target.value)}
               />
             </div>
           </div>
@@ -110,8 +110,12 @@ const CreateExercisePage = () => {
             <div className="flex justify-center">
               <DatePicker
                 className="px-1 w-6/12 rounded-md "
-                selected={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
+                locale="en"
+                dateFormat="dd/MM/yyyy"
+                selected={exerciseDate}
+                onChange={(e) => {
+                  setExerciseDate(e);
+                }}
               />
             </div>
           </div>
